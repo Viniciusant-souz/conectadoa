@@ -64,3 +64,11 @@ CREATE TABLE voluntario_evento (
                                    FOREIGN KEY (id_voluntario) REFERENCES voluntario (id_voluntario) ON DELETE CASCADE,
                                    FOREIGN KEY (id_evento) REFERENCES evento (id_evento) ON DELETE CASCADE
 );
+
+CREATE TABLE usuario (
+                         id_usuario INT AUTO_INCREMENT PRIMARY KEY,
+                         nome VARCHAR(100) NOT NULL,
+                         email VARCHAR(100) NOT NULL UNIQUE,
+                         senha_hash CHAR(60) NOT NULL,
+                         criado_em TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+);

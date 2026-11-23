@@ -1,21 +1,35 @@
 import "./style.css";
+import { lerNomeUsuario, lerToken, sair } from "./api.js";
+import { telaLogin } from "./pages/login.js";
 
 const app = document.querySelector("#app");
-app.innerHTML = `
-  <h1>ConectaDoa</h1>
-  <p>Status da API: <strong id="status">verificando...</strong></p>
-`;
 
-async function verificarApi() {
-  const status = document.querySelector("#status");
-  try {
-    const resposta = await fetch("/api/health");
-    const dados = await resposta.json();
-    status.textContent = `${dados.status} (${dados.hora})`;
-  } catch {
-    status.textContent = "API fora do ar";
+function mostrarApp() {
+  app.innerHTML = `
+        <header class="topo" style="display: flex; justify-content: space-between; padding: 1rem; background: #eee;">
+            <strong>ConectaDoa</strong>
+            <span class="usuario">${lerNomeUsuario()}</span>
+            <button id="sair" class="secundario">Sair</button>
+        </header>
+        <div id="conteudo" style="padding: 2rem;">
+            <h1>Bem-vindo ao PATINHAS!!</h1>
+            <p>Você está logado no sistema!</p>
+            <p><em>(Aqui entrarão as telas de doadores e doações nas próximas aulas)</em></p>
+        </div>
+    `;
+
+  app.querySelector("#sair").onclick = () => {
+    sair();
+    iniciar();
+  };
+}
+
+function iniciar() {
+  if (lerToken()) {
+    mostrarApp();
+  } else {
+    telaLogin(app, mostrarApp);
   }
 }
 
-verificarApi();
-echo "" >> src/main.js
+iniciar();
