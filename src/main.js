@@ -18,3 +18,4 @@ async function verificarApi() {
 }
 
 verificarApi();
+echo "" >> src/main.js
