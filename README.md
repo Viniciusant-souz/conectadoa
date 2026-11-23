@@ -15,3 +15,4 @@ Projeto da ONG ConectaDoa criado com Vite+.
 
 4. Abra http://localhost:5173 no navegador.
    A página deve mostrar "Status da API: ok".
+5. echo "" >> README.md
